@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="modelo.xhtml">
+
+	<ui:define name="titulo">#{msgs.tituloEditarProd}</ui:define>
+
+	<ui:define name="conteudo">
+		<p:panelGrid columns="2">
+
+			<p:outputLabel for="codigo" value="#{msgs.campoCodigo}:" />
+			<h:panelGroup>
+				<h:outputText value="#{filmeMB.filme.codigo}" />
+				
+				
+				<h:inputHidden id="codigo" value="#{filmeMB.filme.codigo}"
+					required="true" rendered="#{filmeMB.filme.codigo != null}" />
+			</h:panelGroup>
+
+			<p:outputLabel for="categoria" value="#{msgs.campoCategoria}:" />
+			<p:selectOneMenu id="categoria"
+				value="#{filmeMB.filme.categoria}" required="true"
+				converter="cat-converter">
+				<f:selectItems value="#{filmeMB.categorias}" var="cat"
+					itemLabel="#{cat.nome}"></f:selectItems>
+			</p:selectOneMenu>
+
+			<p:outputLabel for="descricao" value="#{msgs.campoDescricao}:" />
+			<h:panelGroup>
+				<p:inputText id="descricao" value="#{filmeMB.filme.descricao}"
+					required="true">
+					<f:ajax event="keyup" execute="descricao" render="contarLetras"/>
+				</p:inputText>
+				<h:outputText id="contarLetras" value=" letras: #{filmeMB.contador}" />
+				<p:message for="descricao" />
+			</h:panelGroup>
+
+			<p:outputLabel for="nomefilme" value="#{msgs.camponomeFilme}:" />
+			<p:inputText id="nomefilme" value="#{filmeMB.filme.nomefilme}"
+				required="true">
+				
+			</p:inputText>
+
+			<p:outputLabel for="anofilme" value="#{msgs.campoanoFilme}:" />
+			<p:inputText id="anofilme" value="#{filmeMB.filme.anofilme}"
+				required="true">
+			
+			</p:inputText>
+
+			<p:outputLabel for="qntfilme" value="#{msgs.campoqntFilme}:" />
+			<p:inputText id="qntfilme" value="#{filmeMB.filme.qntfilme}"
+				required="true">
+			</p:inputText>
+			
+			<p:outputLabel for="valorfilme" value="#{msgs.campovalorFilme}:" />
+			<p:inputText id="valorfilme" value="#{filmeMB.filme.valorfilme}"
+				required="true">
+				<f:convertNumber pattern="###,###,##0.00" />
+			</p:inputText>
+
+			<h:outputText value="" />
+			<h:panelGroup>
+				<p:commandButton ajax="false" value="#{msgs.botaoSalvar}" action="#{filmeMB.acaoSalvar}"></p:commandButton>
+				-
+				<p:commandButton ajax="false" value="#{msgs.botaoCancelar}" action="#{filmeMB.acaoCancelar}"
+					immediate="true"></p:commandButton>
+			</h:panelGroup>
+		</p:panelGrid>
+
+	</ui:define>
+
+</ui:composition>
+</html>
