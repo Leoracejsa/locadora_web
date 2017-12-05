@@ -5,11 +5,14 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
+<b:container>
 <ui:composition template="modelo.xhtml">
 
 	<ui:define name="titulo">#{msgs.tituloFilmes}</ui:define>
+
 
 	<ui:define name="conteudo">
 		<p:commandLink action="#{filmeMB.acaoAbrirInclusao}"
@@ -95,4 +98,5 @@
 	</ui:define>
 
 </ui:composition>
+</b:container>
 </html>
